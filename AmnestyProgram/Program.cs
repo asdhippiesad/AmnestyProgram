@@ -33,14 +33,14 @@ namespace AmnestyProgram
 
         public void Work()
         {
-            var criminalsBeforeAmnesty = Amnesty(_criminals);
-            var criminalsAfterAmnesty = _criminals.Union(criminalsBeforeAmnesty);
-
-            Console.WriteLine("Пресупники после амнистии: ");
-            Show(criminalsAfterAmnesty);
+            var criminalsAfterAmnesty = Amnesty(_criminals);
+            var criminalsBeforeAmnesty = _criminals.Union(criminalsAfterAmnesty);
 
             Console.WriteLine("Преступники до амнистии: ");
             Show(criminalsBeforeAmnesty);
+
+            Console.WriteLine("Пресупники после амнистии: ");
+            Show(criminalsAfterAmnesty);
         }
 
         public void Show(IEnumerable<Criminal> criminals)
