@@ -18,7 +18,7 @@ namespace AmnestyProgram
 
     class DataBase
     {
-        IEnumerable<Criminal> _criminals;
+        IEnumerable<Criminal> _criminals = new List<Criminal>();
 
         public DataBase()
         {
@@ -38,14 +38,13 @@ namespace AmnestyProgram
 
         public void Work()
         {
-            var criminalsAfterAmnesty = Amnesty(_criminals);
-            var criminalsBeforeAmnesty = _criminals.Union(criminalsAfterAmnesty);
+            Console.WriteLine("До амнистии: ");
+            Show(_criminals);
 
-            Console.WriteLine("Преступники до амнистии: ");
-            Show(criminalsBeforeAmnesty);
+            _criminals = Amnesty(_criminals);
 
-            Console.WriteLine("Пресупники после амнистии: ");
-            Show(criminalsAfterAmnesty);
+            Console.WriteLine("После амнистии: ");
+            Show(_criminals);
         }
 
         private void Show(IEnumerable<Criminal> criminals)
@@ -67,7 +66,7 @@ namespace AmnestyProgram
         {
             string article = "антиправительственная";
 
-            return criminals.Where(criminal => criminal.Crime != article);
+            return from _criminals in criminals where _criminals.Crime != article select _criminals;
         }
     }
 
