@@ -18,7 +18,7 @@ namespace AmnestyProgram
 
     class DataBase
     {
-        IEnumerable<Criminal> _criminals = new List<Criminal>();
+        private IEnumerable<Criminal> _criminals;
 
         public DataBase()
         {
@@ -66,7 +66,7 @@ namespace AmnestyProgram
         {
             string article = "антиправительственная";
 
-            return from _criminals in criminals where _criminals.Crime != article select _criminals;
+            return criminals.Where(criminal => criminal.Crime != article);
         }
     }
 
