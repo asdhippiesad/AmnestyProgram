@@ -18,18 +18,23 @@ namespace AmnestyProgram
 
     class DataBase
     {
-        IEnumerable<Criminal> _criminals = new List<Criminal>
+        IEnumerable<Criminal> _criminals;
+
+        public DataBase()
         {
-            new Criminal("Смиринов", "грабеж"),
-            new Criminal("Кузнецов", "воровство"),
-            new Criminal("Алексеев", "антиправительственная"),
-            new Criminal("Никитин", "причинение смерти по неосторожности"),
-            new Criminal("Морозов", "антиправительственная"),
-            new Criminal("Николаев", "грабеж"),
-            new Criminal("Макаров", "воровство"),
-            new Criminal("Андреев", "антиправительственная"),
-            new Criminal("Захаров", "антиправительственная"),
-        };
+            _criminals = new List<Criminal>
+            {
+                new Criminal("Смиринов", "грабеж"),
+                new Criminal("Кузнецов", "воровство"),
+                new Criminal("Алексеев", "антиправительственная"),
+                new Criminal("Никитин", "причинение смерти по неосторожности"),
+                new Criminal("Морозов", "антиправительственная"),
+                new Criminal("Николаев", "грабеж"),
+                new Criminal("Макаров", "воровство"),
+                new Criminal("Андреев", "антиправительственная"),
+                new Criminal("Захаров", "антиправительственная"),
+            };
+        }
 
         public void Work()
         {
@@ -43,13 +48,13 @@ namespace AmnestyProgram
             Show(criminalsAfterAmnesty);
         }
 
-        public void Show(IEnumerable<Criminal> criminals)
+        private void Show(IEnumerable<Criminal> criminals)
         {
             if (criminals.Any())
             {
                 foreach (Criminal jail in criminals)
                 {
-                    jail.ShowIndo();
+                    jail.ShowInfo();
                 }
             }
             else
@@ -58,11 +63,11 @@ namespace AmnestyProgram
             }
         }
 
-        public static IEnumerable<Criminal> Amnesty(IEnumerable<Criminal> criminals)
+        private static IEnumerable<Criminal> Amnesty(IEnumerable<Criminal> criminals)
         {
             string article = "антиправительственная";
 
-            return criminals.Where(criminal => criminal.Crime != article).ToList();
+            return criminals.Where(criminal => criminal.Crime != article);
         }
     }
 
@@ -77,7 +82,7 @@ namespace AmnestyProgram
         public string FullName { get; private set; }
         public string Crime { get; private set; }
 
-        public void ShowIndo()
+        public void ShowInfo()
         {
             Console.WriteLine($"имя: {FullName}\t" +
                               $"статья: {Crime}");
